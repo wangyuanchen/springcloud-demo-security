@@ -1,0 +1,33 @@
+server:
+  port: 9004
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_ZONE_HOST:localhost}:${EUREKA_ZONE_PORT:8761}/eureka/
+
+spring:
+  application:
+    name: mqtt
+
+logging:
+  level:
+    org.springframework.web: debug
+    org.springframework.security: DEBUG
+    org.apache.ibatis: debug
+    java.sql.PreparedStatement: debug
+  path: logs/mqtt/
+  file:
+    max-size: 1GB
+#  file: logs/auth/aaa.log
+
+mqtt:
+  username: admin
+  password: admin
+  url: tcp://localhost:1883
+  client:
+    id: clientId
+  server:
+    id: serverId
+  default:
+    topic: zhaoTest

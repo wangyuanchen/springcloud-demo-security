@@ -1,0 +1,76 @@
+server:
+  port: 8443
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_ZONE_HOST:localhost}:${EUREKA_ZONE_PORT:8761}/eureka/
+
+spring:
+  application:
+    name: geteway
+  redis:
+    database: 10
+    host: 172.19.1.209
+    port: 6379
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default-filters:
+        - name: RequestRateLimiter
+          args:
+            key-resolver: "#{@remoteAddrKeyResolver}"
+            redis-rate-limiter.replenishRate: 5
+            redis-rate-limiter.burstCapacity: 10
+#      routes:
+#        - id: bulletscreen
+#          # 重点！/info必须使用http进行转发，lb代表从注册中心获取服务
+#          uri: lb://bullet
+#          predicates:
+#            # 重点！转发该路径！
+#            - Path=/bullet/info/**
+#        - id: bulletscreen
+#          # 重点！lb:ws://代表从注册中心获取服务，并且转发协议为websocket，这种格式怀疑人生！
+#          uri: lb:ws://bullet
+#          predicates:
+#            # 转发/bullet端点下的所有路径
+#            - Path=/bullet/**
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedMethods: "*"
+
+hystrix:
+  command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 3000
+logging:
+  level:
+    com.springboot.cloud.gateway: debug
+    com.jalja.org.spring: debug
+  path: logs/geteway/
+  file:
+    max-size: 1GB
+
+gateway:
+  log:
+#    是否开启转发日志，开启后，转发前的请求、被加工后的转发出去的请求、收到的响应都被输出到日志
+    enable: true
+  authorization:
+#    是否开启鉴权过滤
+    enable: true
+#    鉴权服务的名称
+    checkTokenServiceName: auth
+#    鉴权服务的端点路径
+    checkTokenEndpointUrl: /authorization/check
+#    务接口白名单
+    whitelist:
+      - /**/phoneLogin
+      - /**/companyLogin

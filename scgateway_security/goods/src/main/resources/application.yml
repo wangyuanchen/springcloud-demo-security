@@ -1,0 +1,38 @@
+server:
+  port: 9001
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_ZONE_HOST:localhost}:${EUREKA_ZONE_PORT:8761}/eureka/
+
+spring:
+  application:
+    name: goods
+
+logging:
+  level:
+    org.springframework.web: debug
+    org.springframework.security: DEBUG
+    org.apache.ibatis: debug
+    java.sql.PreparedStatement: debug
+  path: logs/goods/
+  file:
+    max-size: 1GB
+#  file: logs/auth/aaa.log
+
+security:
+  oauth2:
+    client:
+      clientId: resource1
+      clientSecret: secret
+      userAuthorizationUri: http://localhost:8001/oauth/authorize
+      grant-type: password
+      scope: read
+      access-token-uri: http://localhost:8001/oauth/token
+    resource:
+      userInfoUri: http://localhost:8001/user
+    authorization:
+      check-token-access: http://localhost:8001/oauth/check_token
+  basic:
+    enabled: false
