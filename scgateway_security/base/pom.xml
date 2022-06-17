@@ -26,7 +26,7 @@
         <mysql.connnector.version>5.1.48</mysql.connnector.version>
         <elasticsearch.version>6.4.3</elasticsearch.version>
         <flyway.version>5.2.4</flyway.version>
-        <fastjson.version>1.2.47</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <druid.starter.version>1.1.10</druid.starter.version>
         <guava.version>23.0</guava.version>
         <lombok.version>1.14.8</lombok.version>
