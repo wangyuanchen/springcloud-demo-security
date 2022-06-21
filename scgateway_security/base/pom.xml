@@ -23,7 +23,7 @@
         <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <springfox.version>2.9.2</springfox.version>
-        <mysql.connnector.version>5.1.48</mysql.connnector.version>
+        <mysql.connnector.version>8.0.28</mysql.connnector.version>
         <elasticsearch.version>6.4.3</elasticsearch.version>
         <flyway.version>5.2.4</flyway.version>
         <fastjson.version>1.2.47</fastjson.version>
